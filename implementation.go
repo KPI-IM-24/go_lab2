@@ -7,7 +7,11 @@ import (
 	"strings"
 )
 
-func EvaluatePostfix(expression string) (int, error) {
+type DefaultPostfixCalculator struct {
+}
+
+func (dpc *DefaultPostfixCalculator) EvaluatePostfix(expression string) (int, error) {
+
 	var stack []int
 
 	tokens := strings.Fields(expression)
