@@ -1,23 +1,36 @@
 package lab2
 
 import (
-	"fmt"
-	"testing"
-
 	"github.com/stretchr/testify/assert"
+	"testing"
 )
 
-func TestPrefixToPostfix(t *testing.T) {
-	res, err := PrefixToPostfix("+ 5 * - 4 2 3")
-	if assert.Nil(t, err) {
-		assert.Equal(t, "4 2 - 3 * 5 +", res)
+func TestEvaluatePostfix(t *testing.T) {
+	tests := []struct {
+		name       string
+		expression string
+		expected   int
+		wantErr    bool
+	}{
+		{"SimpleAddition", "0 4 +", 4, false},
+		{"SimplePow", "3 4 ^", 81, false},
+		{"SimpleExpression", "3 4 + 2 * 7 /", 2, false},
+		{"EmptyString", "", 0, true},
+		{"InvalidSymbol", "3 4 &", 0, true},
+		{"OneOperand", "5", 5, false},
+		{"ComplexExpression", "1 2 + 3 4 + *", 21, false},
 	}
-}
 
-func ExamplePrefixToPostfix() {
-	res, _ := PrefixToPostfix("+ 2 2")
-	fmt.Println(res)
+	for _, testCase := range tests {
+		t.Run(testCase.name, func(t *testing.T) {
+			got, err := EvaluatePostfix(testCase.expression)
 
-	// Output:
-	// 2 2 +
+			if testCase.wantErr {
+				assert.Error(t, err, "EvaluatePostfix() should return an error")
+			} else {
+				assert.NoError(t, err, "EvaluatePostfix() should not return an error")
+				assert.Equal(t, testCase.expected, got, "evaluatePostfix() returned incorrect result")
+			}
+		})
+	}
 }
