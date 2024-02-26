@@ -3,12 +3,11 @@ package main
 import (
 	"flag"
 	"fmt"
+	"go_lab2"
 	"io"
 	"log"
 	"os"
 	"strings"
-
-	lab2 "github.com/roman-mazur/architecture-lab-2"
 )
 
 var (
