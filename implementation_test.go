@@ -1,6 +1,7 @@
 package lab2
 
 import (
+	"fmt"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -33,4 +34,46 @@ func TestEvaluatePostfix(t *testing.T) {
 			}
 		})
 	}
+}
+func ExampleEvaluatePostfix() {
+
+	// Example 1: Simple addition
+	result, err := EvaluatePostfix("3 4 +")
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	fmt.Println(result)
+
+	// Example 2: Complex expression
+	result, err = EvaluatePostfix("5 1 2 + 4 * + 3 -")
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	fmt.Println(result)
+
+	// Example 3: Division by zero
+	result, err = EvaluatePostfix("4 0 /")
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
+	// Example 4: Unknown operator
+	result, err = EvaluatePostfix("4 5 &")
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+
+	// Example 5: Power operation
+	result, err = EvaluatePostfix("2 3 ^")
+	if err != nil {
+		fmt.Println("Error:", err)
+	}
+	fmt.Println(result)
+
+	// Output:
+	// 7
+	// 14
+	// Error: division by zero
+	// Error: unknown operator: &
+	// 8
 }
