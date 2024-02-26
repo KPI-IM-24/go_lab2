@@ -47,3 +47,8 @@ func TestComputeHandler_Computes(t *testing.T) {
 		})
 	}
 }
+
+func TestShouldFail(t *testing.T) {
+
+	assert.True(t, false, "test created to fail, as the one failed build is required")
+}
