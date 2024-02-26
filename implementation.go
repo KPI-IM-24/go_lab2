@@ -23,7 +23,7 @@ func (dpc *DefaultPostfixCalculator) EvaluatePostfix(expression string) (int, er
 			stackLen := len(stack)
 
 			if stackLen < 2 {
-				return 0, fmt.Errorf("evaluatePostfix: invalid expression was used")
+				return 0, fmt.Errorf("invalid expression was used")
 			}
 
 			a, b := stack[stackLen-2], stack[stackLen-1]
